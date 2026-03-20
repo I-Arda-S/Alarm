@@ -17,11 +17,19 @@ namespace Alarm2v
         public Form1()
         {
             InitializeComponent();
-            trckBar.Value = 3;
+            trckBar.Value = 3; lblHiz.Text = "Hız: 1.00";
         }
 
         private void btn_Click(object sender,EventArgs e)
         {
+            if(tmrAlarmSesDongu.Enabled)
+            {
+                tmrAlarmSesDongu.Enabled = false;
+                alarmCal.Stop();
+                btn.Text = "Alarm Başlat";
+                return;
+            }
+
             if(!tmrSayac.Enabled)
             {
                 tmrSayac.Enabled = true;
@@ -65,11 +73,11 @@ namespace Alarm2v
             {
                 case 1:
                     lblHiz.Text = "Hız: 0.25";
-                    tmrSayac.Interval = 250;
+                    tmrSayac.Interval = 2000;
                     break;
                 case 2:
                     lblHiz.Text = "Hız: 0.50";
-                    tmrSayac.Interval = 500;
+                    tmrSayac.Interval = 1500;
                     break;
                 case 3:
                     lblHiz.Text = "Hız: 1.00";
@@ -77,13 +85,21 @@ namespace Alarm2v
                     break;
                 case 4:
                     lblHiz.Text = "Hız: 1.50";
-                    tmrSayac.Interval = 1500;
+                    tmrSayac.Interval = 500;
                     break;
                 case 5:
                     lblHiz.Text = "Hız: 2.00";
-                    tmrSayac.Interval = 2000;
+                    tmrSayac.Interval = 250;
                     break;
             }
+        }
+
+        private void tmrAlarmSesDongu_Tick(object sender,EventArgs e)
+        {
+            alarmCal.Stop();
+            alarmCal.Play();
+            btn.Text = "Alarm Çalıyor";
+            tmrAlarmSesDongu.Interval = 6200;
         }
 
         private void ekranGuncelle()
@@ -109,8 +125,11 @@ namespace Alarm2v
                         saat = 0;
                         dakika = 0;
                         saniye = 0;
+
                         btn.PerformClick();
-                        alarmCal.Play();
+
+                        tmrAlarmSesDongu.Interval = 10;
+                        tmrAlarmSesDongu.Enabled = true;
                         
                     }// alarmın çalacağı yer
                 }
