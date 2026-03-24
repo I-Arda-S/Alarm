@@ -26,14 +26,14 @@ namespace Alarm2v
             {
                 tmrAlarmSesDongu.Enabled = false;
                 alarmCal.Stop();
-                btn.Text = "Alarm Başlat";
+                btn.Text = "Zamanlayıcıyı Başlat";
                 return;
             }
 
             if(!tmrSayac.Enabled)
             {
                 tmrSayac.Enabled = true;
-                btn.Text = "Alarmı Durdur";
+                btn.Text = "Zamanlayıcıyı Durdur";
 
                 dmnSaat.ReadOnly = true;
                 dmnSaat.Increment = 0;
@@ -49,7 +49,7 @@ namespace Alarm2v
             else
             {
                 tmrSayac.Enabled = false;
-                btn.Text = "Alarmı Başlat";
+                btn.Text = "Zamanlayıcıyı Başlat";
 
                 dmnSaat.ReadOnly = false;
                 dmnSaat.Increment = 1;
@@ -98,7 +98,7 @@ namespace Alarm2v
         {
             alarmCal.Stop();
             alarmCal.Play();
-            btn.Text = "Alarm Çalıyor";
+            btn.Text = "Süre Doldu";
             tmrAlarmSesDongu.Interval = 6200;
         }
 
@@ -131,7 +131,7 @@ namespace Alarm2v
                         tmrAlarmSesDongu.Interval = 10;
                         tmrAlarmSesDongu.Enabled = true;
                         
-                    }// alarmın çalacağı yer
+                    }// zamanlayıcının çalacağı yer
                 }
             }
                 

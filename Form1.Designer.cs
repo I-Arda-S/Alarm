@@ -58,7 +58,7 @@
             this.btn.Name = "btn";
             this.btn.Size = new System.Drawing.Size(402, 71);
             this.btn.TabIndex = 0;
-            this.btn.Text = "Alarmı Başlat";
+            this.btn.Text = "Zamanlayıcıyı Başlat";
             this.btn.UseVisualStyleBackColor = true;
             this.btn.Click += new System.EventHandler(this.btn_Click);
             // 
@@ -155,7 +155,7 @@
             this.MaximumSize = new System.Drawing.Size(420, 470);
             this.MinimumSize = new System.Drawing.Size(420, 470);
             this.Name = "Form1";
-            this.Text = "Alarm";
+            this.Text = "Zamanlayıcı";
             ((System.ComponentModel.ISupportInitialize)(this.dmnSaat)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dmnDakika)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dmnSaniye)).EndInit();
