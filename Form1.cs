@@ -34,6 +34,7 @@ namespace Alarm2v
             {
                 tmrSayac.Enabled = true;
                 btn.Text = "Zamanlayıcıyı Durdur";
+                
 
                 dmnSaat.ReadOnly = true;
                 dmnSaat.Increment = 0;
@@ -100,6 +101,26 @@ namespace Alarm2v
             alarmCal.Play();
             btn.Text = "Süre Doldu";
             tmrAlarmSesDongu.Interval = 6200;
+        }
+
+        private void tabCntrl_SelectedIndexChanged(object sender,EventArgs e)
+        {
+            if(tabCntrl.SelectedIndex == 0)
+            {
+                btn.Text = "Zamanlayıcıyı Başlat";
+            }
+            else if(tabCntrl.SelectedIndex == 1)
+            {
+                btn.Text = "Alarmı başlat";
+            }
+        }
+
+        private void tabCntrl_Selecting(object sender,TabControlCancelEventArgs e)
+        {
+            if(tmrSayac.Enabled && tabCntrl.SelectedIndex == 1)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void ekranGuncelle()
