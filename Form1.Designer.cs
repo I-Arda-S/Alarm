@@ -35,13 +35,13 @@
             this.tmrAlarmSesDongu = new System.Windows.Forms.Timer(this.components);
             this.tabCntrl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lblBilgi = new System.Windows.Forms.Label();
             this.lblHiz = new System.Windows.Forms.Label();
             this.trckBar = new System.Windows.Forms.TrackBar();
             this.dmnSaniye = new System.Windows.Forms.NumericUpDown();
             this.dmnDakika = new System.Windows.Forms.NumericUpDown();
             this.dmnSaat = new System.Windows.Forms.NumericUpDown();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabCntrl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trckBar)).BeginInit();
@@ -57,11 +57,10 @@
             // 
             // btn
             // 
-            this.btn.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btn.Location = new System.Drawing.Point(0, 352);
+            this.btn.Location = new System.Drawing.Point(6, 292);
             this.btn.Name = "btn";
-            this.btn.Size = new System.Drawing.Size(402, 71);
+            this.btn.Size = new System.Drawing.Size(358, 75);
             this.btn.TabIndex = 0;
             this.btn.Text = "Zamanlayıcıyı Başlat";
             this.btn.UseVisualStyleBackColor = true;
@@ -79,7 +78,7 @@
             this.tabCntrl.Location = new System.Drawing.Point(12, 12);
             this.tabCntrl.Name = "tabCntrl";
             this.tabCntrl.SelectedIndex = 0;
-            this.tabCntrl.Size = new System.Drawing.Size(378, 334);
+            this.tabCntrl.Size = new System.Drawing.Size(378, 399);
             this.tabCntrl.TabIndex = 8;
             this.tabCntrl.SelectedIndexChanged += new System.EventHandler(this.tabCntrl_SelectedIndexChanged);
             this.tabCntrl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabCntrl_Selecting);
@@ -87,6 +86,7 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.lblBilgi);
+            this.tabPage1.Controls.Add(this.btn);
             this.tabPage1.Controls.Add(this.lblHiz);
             this.tabPage1.Controls.Add(this.trckBar);
             this.tabPage1.Controls.Add(this.dmnSaniye);
@@ -95,20 +95,10 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(370, 305);
+            this.tabPage1.Size = new System.Drawing.Size(370, 370);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Zamanlayıcı";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(370, 305);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Alarm";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // lblBilgi
             // 
@@ -141,6 +131,7 @@
             this.trckBar.Size = new System.Drawing.Size(195, 56);
             this.trckBar.TabIndex = 11;
             this.trckBar.Value = 1;
+            this.trckBar.Scroll += new System.EventHandler(this.trckBar_Scroll);
             // 
             // dmnSaniye
             // 
@@ -181,13 +172,23 @@
             this.dmnSaat.Size = new System.Drawing.Size(61, 45);
             this.dmnSaat.TabIndex = 8;
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(370, 305);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Alarm";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(402, 423);
             this.Controls.Add(this.tabCntrl);
-            this.Controls.Add(this.btn);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(420, 470);
             this.MinimumSize = new System.Drawing.Size(420, 470);

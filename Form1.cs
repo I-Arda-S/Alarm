@@ -117,7 +117,7 @@ namespace Alarm2v
 
         private void tabCntrl_Selecting(object sender,TabControlCancelEventArgs e)
         {
-            if(tmrSayac.Enabled && tabCntrl.SelectedIndex == 1)
+            if(tmrSayac.Enabled)
             {
                 e.Cancel = true;
             }
