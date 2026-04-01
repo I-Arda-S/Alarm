@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tmrSayac = new System.Windows.Forms.Timer(this.components);
             this.btn = new System.Windows.Forms.Button();
-            this.tmrAlarmSesDongu = new System.Windows.Forms.Timer(this.components);
             this.tabCntrl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.lblBilgi = new System.Windows.Forms.Label();
@@ -70,11 +69,6 @@
             this.btn.Text = "Zamanlayıcıyı Başlat";
             this.btn.UseVisualStyleBackColor = true;
             this.btn.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // tmrAlarmSesDongu
-            // 
-            this.tmrAlarmSesDongu.Interval = 6200;
-            this.tmrAlarmSesDongu.Tick += new System.EventHandler(this.tmrAlarmSesDongu_Tick);
             // 
             // tabCntrl
             // 
@@ -258,7 +252,6 @@
 
         private System.Windows.Forms.Timer tmrSayac;
         private System.Windows.Forms.Button btn;
-        private System.Windows.Forms.Timer tmrAlarmSesDongu;
         private System.Windows.Forms.TabControl tabCntrl;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label lblBilgi;

@@ -48,10 +48,10 @@ namespace Alarm2v
 
         private void btn_Click(object sender,EventArgs e)
         {
-            if(tmrAlarmSesDongu.Enabled || btn.Text==sureDoldu)
+            if(btn.Text==sureDoldu || zamanlayiciCaliyor)
             {
-                tmrAlarmSesDongu.Enabled = false;
                 alarmCal.Stop();
+                tmrSayac.Enabled = false;
                 btn.Text = zamanlayiciBaslat;
                 return;
             }
@@ -126,14 +126,6 @@ namespace Alarm2v
             }
         }
 
-        private void tmrAlarmSesDongu_Tick(object sender,EventArgs e)
-        {
-            alarmCal.Stop();
-            alarmCal.Play();
-            btn.Text = sureDoldu;
-            tmrAlarmSesDongu.Interval = 6200;
-        }
-
         private void btnAlarm_Click(object sender,EventArgs e)
         {
             if(btnAlarm.Text == alarmKapat)
@@ -194,6 +186,8 @@ namespace Alarm2v
             {
                 tabCntrl.SelectedIndex = 1;
             }// Alarm sekmesi çalarken oradan çıkışı engelle.
+
+            // Zamanlayıcı çalarken tabı sabitlemeye çalışmıycam, ikiside aynı anda çalarsa sıkıntı vercek gibi.
         }
 
         private void ekranGuncelle()
@@ -203,6 +197,7 @@ namespace Alarm2v
             dmnSaniye.Value = saniye;
         }
 
+        private bool zamanlayiciCaliyor = false;
         private void tmrSayac_Tick(object sender,EventArgs e)
         {
             saniye--;
@@ -224,8 +219,7 @@ namespace Alarm2v
 
                         alarmCal.PlayLooping();
                         btn.Text = sureDoldu;
-                        //tmrAlarmSesDongu.Interval = 10;
-                        //tmrAlarmSesDongu.Enabled = true;
+                        zamanlayiciCaliyor = true;
 
                     }// zamanlayıcının çalacağı yer
                 }
