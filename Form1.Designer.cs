@@ -42,12 +42,17 @@
             this.dmnDakika = new System.Windows.Forms.NumericUpDown();
             this.dmnSaat = new System.Windows.Forms.NumericUpDown();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.btnAlarm = new System.Windows.Forms.Button();
+            this.tmrAlarm = new System.Windows.Forms.Timer(this.components);
             this.tabCntrl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trckBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dmnSaniye)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dmnDakika)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dmnSaat)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tmrSayac
@@ -61,7 +66,7 @@
             this.btn.Location = new System.Drawing.Point(6, 292);
             this.btn.Name = "btn";
             this.btn.Size = new System.Drawing.Size(358, 75);
-            this.btn.TabIndex = 0;
+            this.btn.TabIndex = 12;
             this.btn.Text = "Zamanlayıcıyı Başlat";
             this.btn.UseVisualStyleBackColor = true;
             this.btn.Click += new System.EventHandler(this.btn_Click);
@@ -81,7 +86,6 @@
             this.tabCntrl.Size = new System.Drawing.Size(378, 399);
             this.tabCntrl.TabIndex = 8;
             this.tabCntrl.SelectedIndexChanged += new System.EventHandler(this.tabCntrl_SelectedIndexChanged);
-            this.tabCntrl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabCntrl_Selecting);
             // 
             // tabPage1
             // 
@@ -174,13 +178,56 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.textBox1);
+            this.tabPage2.Controls.Add(this.dateTimePicker1);
+            this.tabPage2.Controls.Add(this.btnAlarm);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(370, 305);
+            this.tabPage2.Size = new System.Drawing.Size(370, 370);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Alarm";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.textBox1.Location = new System.Drawing.Point(110, 61);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(140, 30);
+            this.textBox1.TabIndex = 14;
+            this.textBox1.Text = "00:00:00";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker1.Location = new System.Drawing.Point(110, 17);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowUpDown = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(140, 38);
+            this.dateTimePicker1.TabIndex = 13;
+            this.dateTimePicker1.Value = new System.DateTime(2026, 3, 31, 13, 49, 21, 0);
+            // 
+            // btnAlarm
+            // 
+            this.btnAlarm.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnAlarm.Location = new System.Drawing.Point(6, 289);
+            this.btnAlarm.Name = "btnAlarm";
+            this.btnAlarm.Size = new System.Drawing.Size(358, 75);
+            this.btnAlarm.TabIndex = 11;
+            this.btnAlarm.Text = "Alarmı Başlat";
+            this.btnAlarm.UseVisualStyleBackColor = true;
+            this.btnAlarm.Click += new System.EventHandler(this.btnAlarm_Click);
+            // 
+            // tmrAlarm
+            // 
+            this.tmrAlarm.Interval = 1000;
+            this.tmrAlarm.Tick += new System.EventHandler(this.tmrAlarm_Tick);
             // 
             // Form1
             // 
@@ -201,6 +248,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dmnSaniye)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dmnDakika)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dmnSaat)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -219,6 +268,10 @@
         private System.Windows.Forms.NumericUpDown dmnDakika;
         private System.Windows.Forms.NumericUpDown dmnSaat;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button btnAlarm;
+        private System.Windows.Forms.Timer tmrAlarm;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

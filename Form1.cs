@@ -18,22 +18,48 @@ namespace Alarm2v
         {
             InitializeComponent();
             trckBar.Value = 3; lblHiz.Text = "Hız: 1.00";
+            btn.Text = zamanlayiciBaslat;
+
+            dateTimePicker1.Value = DateTime.Now;
+            dateTimePicker1.MouseWheel += dateTimePicker1_MouseWheel;
+        }
+
+        private string sureDoldu = "Süre Doldu";
+        private string zamanlayiciBaslat= "Zamanlayıcıyı Başlat";
+        private string zamanlayiciDurdur = "Zamanlayıcıyı Durdur";
+
+        private string alarmBaslat = "Alarmı Başlat";
+        private string alarmDurdur = "Alarmı Durdur";
+        private string alarmKapat = "Alarmı Kapat";
+
+        private void dateTimePicker1_MouseWheel(object sender,MouseEventArgs e)
+        {
+            if(e.Delta > 0) 
+            {
+                SendKeys.Send("{UP}");
+            }
+            else if(e.Delta < 0)
+            {
+                SendKeys.Send("{DOWN}");
+            }
+
+            ((HandledMouseEventArgs)e).Handled = true;
         }
 
         private void btn_Click(object sender,EventArgs e)
         {
-            if(tmrAlarmSesDongu.Enabled)
+            if(tmrAlarmSesDongu.Enabled || btn.Text==sureDoldu)
             {
                 tmrAlarmSesDongu.Enabled = false;
                 alarmCal.Stop();
-                btn.Text = "Zamanlayıcıyı Başlat";
+                btn.Text = zamanlayiciBaslat;
                 return;
             }
 
-            if(!tmrSayac.Enabled)
+            if(!tmrSayac.Enabled)// Zamanlayıcı başlayacakken
             {
                 tmrSayac.Enabled = true;
-                btn.Text = "Zamanlayıcıyı Durdur";
+                btn.Text = zamanlayiciDurdur;
                 
 
                 dmnSaat.ReadOnly = true;
@@ -47,22 +73,27 @@ namespace Alarm2v
                 dakika = dmnDakika.Value;
                 saniye = dmnSaniye.Value;
             }
-            else
+            else // Zamanlayıcı durdurulacakken
             {
-                tmrSayac.Enabled = false;
-                btn.Text = "Zamanlayıcıyı Başlat";
-
-                dmnSaat.ReadOnly = false;
-                dmnSaat.Increment = 1;
-                dmnDakika.ReadOnly = false;
-                dmnDakika.Increment=1;
-                dmnSaniye.ReadOnly = false;
-                dmnSaniye.Increment=1;
-
-                dmnSaat.Value = saat;
-                dmnDakika.Value = dakika;
-                dmnSaniye.Value = saniye;
+                durdurZamanlayici();
             }
+        }
+
+        private void durdurZamanlayici()
+        {
+            tmrSayac.Enabled= false;
+            btn.Text = zamanlayiciBaslat;
+
+            dmnSaat.ReadOnly = false;
+            dmnSaat.Increment = 1;
+            dmnDakika.ReadOnly = false;
+            dmnDakika.Increment=1;
+            dmnSaniye.ReadOnly = false;
+            dmnSaniye.Increment=1;
+
+            dmnSaat.Value = saat;
+            dmnDakika.Value = dakika;
+            dmnSaniye.Value = saniye;
         }
 
         private decimal saat, dakika, saniye;
@@ -99,28 +130,70 @@ namespace Alarm2v
         {
             alarmCal.Stop();
             alarmCal.Play();
-            btn.Text = "Süre Doldu";
+            btn.Text = sureDoldu;
             tmrAlarmSesDongu.Interval = 6200;
+        }
+
+        private void btnAlarm_Click(object sender,EventArgs e)
+        {
+            if(btnAlarm.Text == alarmKapat)
+            {
+                alarmCal.Stop();
+                btnAlarm.Text = alarmBaslat;
+                return;
+            }
+
+            if(tmrAlarm.Enabled) // 
+            {
+                tmrAlarm.Enabled = false;
+                btnAlarm.Text = alarmBaslat;
+
+                dateTimePicker1.Enabled = true;
+
+            }
+            else //
+            {
+                tmrAlarm.Enabled = true;
+                btnAlarm.Text = alarmDurdur;
+
+                dateTimePicker1.Enabled= false;
+            }
+        }
+
+        private void tmrAlarm_Tick(object sender,EventArgs e)
+        {
+            DateTime simdi = DateTime.Now;
+            TimeSpan fark = dateTimePicker1.Value - simdi;
+
+            if(simdi > dateTimePicker1.Value)
+                fark += TimeSpan.FromDays(1);
+            else if (fark.Hours==0 && fark.Minutes==0 && fark.Seconds==0)
+            {
+                alarmCal.PlayLooping();
+
+                btnAlarm.Text = alarmKapat;
+
+                tabCntrl.SelectedIndex = 1;
+                // Tab değişmeycek
+                tmrAlarm.Enabled = false;
+
+
+                if(tmrSayac.Enabled)
+                {
+                    durdurZamanlayici();
+                    MessageBox.Show("Zamanlayıcı durduruldu, alarm çalıyor.");
+                }// Alarm bitince zamanlayıcyı durdur.
+            }
+
+            textBox1.Text = fark.ToString(@"hh\:mm\:ss");
         }
 
         private void tabCntrl_SelectedIndexChanged(object sender,EventArgs e)
         {
-            if(tabCntrl.SelectedIndex == 0)
+            if(tabCntrl.SelectedIndex != 1 && btnAlarm.Text == alarmKapat)
             {
-                btn.Text = "Zamanlayıcıyı Başlat";
-            }
-            else if(tabCntrl.SelectedIndex == 1)
-            {
-                btn.Text = "Alarmı başlat";
-            }
-        }
-
-        private void tabCntrl_Selecting(object sender,TabControlCancelEventArgs e)
-        {
-            if(tmrSayac.Enabled)
-            {
-                e.Cancel = true;
-            }
+                tabCntrl.SelectedIndex = 1;
+            }// Alarm sekmesi çalarken oradan çıkışı engelle.
         }
 
         private void ekranGuncelle()
@@ -149,9 +222,11 @@ namespace Alarm2v
 
                         btn.PerformClick();
 
-                        tmrAlarmSesDongu.Interval = 10;
-                        tmrAlarmSesDongu.Enabled = true;
-                        
+                        alarmCal.PlayLooping();
+                        btn.Text = sureDoldu;
+                        //tmrAlarmSesDongu.Interval = 10;
+                        //tmrAlarmSesDongu.Enabled = true;
+
                     }// zamanlayıcının çalacağı yer
                 }
             }
